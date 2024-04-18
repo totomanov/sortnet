@@ -1,23 +1,10 @@
 ## Sortnet
 
-**Gas-optimized sorting of fixed-size arrays.**
+Solidity library for sorting fixed-size arrays in an extremely gas-efficient way.
 
-<svg style="background-color: #FFF;" width="168" height="96">
-<line x1="0" y1="16" x2="168" y2="16" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-<line x1="0" y1="48" x2="168" y2="48" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-<line x1="0" y1="80" x2="168" y2="80" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-<circle cx="20" cy="16" r="6" fill="black"></circle>
-<circle cx="20" cy="80" r="6" fill="black"></circle>
-<line x1="20" y1="16" x2="20" y2="80" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-<circle cx="76" cy="16" r="6" fill="black"></circle>
-<circle cx="76" cy="48" r="6" fill="black"></circle>
-<line x1="76" y1="16" x2="76" y2="48" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-<circle cx="132" cy="48" r="6" fill="black"></circle>
-<circle cx="132" cy="80" r="6" fill="black"></circle>
-<line x1="132" y1="48" x2="132" y2="80" style="stroke:rgb(0,0,0);stroke-width:1"></line>
-</svg>
+`LibSortNet` sorts small fixed-size arrays in 30–60% less gas than [Solady](https://github.com/Vectorized/solady)'s gas-optimized `LibSort::insertionSort`.
 
-## Sorting Networks
+## Introduction
 
 A _sorting network_ is a sequence of operations that sorts an array in place. Each operation compares two elements and swaps them conditionally.
 
@@ -44,6 +31,10 @@ To install with [**Foundry**](https://github.com/foundry-rs/foundry):
 ```sh
 forge install transmissions11/solmate
 ```
+
+## Usage
+
+You can use `LibSortNet` to sort a `uint256[] memory` array with a known fixed size (2-10) in place in ascending order.
 
 ## Benchmark
 
@@ -145,4 +136,4 @@ Please always include your own thorough tests when using Sortnet to make sure it
 
 ## Acknowledgements
 
-Inspired by [Solady](https://github.com/Vectorized/solady).
+[hoytech](https://github.com/hoytech) and [Solady](https://github.com/Vectorized/solady)

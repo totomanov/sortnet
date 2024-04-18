@@ -319,12 +319,4 @@ contract LibSortNetBenchTest is Test {
             a[i] = i;
         }
     }
-
-    // function deepcopy(uint256[] memory a) internal pure returns (uint256[] memory) {
-    //     uint256[] memory $a = new uint256[](a.length);
-    //     for (uint256 i = 0; i < a.length; ++i) {
-    //         $a[i] = a[i];
-    //     }
-    //     return $a;
-    // }
 }
