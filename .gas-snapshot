@@ -1,0 +1,7 @@
+LibSortNetTest:testSort2((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 3925, ~: 3911)
+LibSortNetTest:testSort3((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 4917, ~: 4914)
+LibSortNetTest:testSort4((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 5682, ~: 5675)
+LibSortNetTest:testSort5((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 6926, ~: 6924)
+LibSortNetTest:testSort6((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 7816, ~: 7815)
+LibSortNetTest:testSort7((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 8895, ~: 8888)
+LibSortNetTest:testSort8((uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)) (runs: 10002, μ: 9803, ~: 9808)

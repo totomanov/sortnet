@@ -62,6 +62,8 @@ forge test --match-test Bench -vvv
 | 6    | 633                          | 1257                             | 1793                    |
 | 7    | 859                          | 1574                             | 2123                    |
 | 8    | 1361                         | 1940                             | 2495                    |
+| 9    | 1715                         | 2323                             | 2907                    |
+| 10   | 1961                         | 2731                             | 3321                    |
 
 <details>
   <summary><i>Data</i></summary>
@@ -76,6 +78,12 @@ via-ir = true
 ```
 
 ```
+[PASS] testBench_sort10() (gas: 13820756)
+Logs:
+  LibSortNet::sort10 (min: 1605, max: 2236, ~: 1961)
+  LibSort::insertionSort (min: 1544, max: 3916, ~: 2731)
+  LibSort::sort (min: 2187, max: 4465, ~: 3321)
+
 [PASS] testBench_sort2() (gas: 2926355)
 Logs:
   LibSortNet::sort2 (min: 40, max: 71, ~: 55)
@@ -88,19 +96,19 @@ Logs:
   LibSort::insertionSort (min: 397, max: 582, ~: 489)
   LibSort::sort (min: 463, max: 1127, ~: 848)
 
-[PASS] testBench_sort4() (gas: 5192784)
+[PASS] testBench_sort4() (gas: 5192828)
 Logs:
   LibSortNet::sort4 (min: 196, max: 347, ~: 268)
   LibSort::insertionSort (min: 526, max: 904, ~: 709)
   LibSort::sort (min: 529, max: 1479, ~: 1190)
 
-[PASS] testBench_sort5() (gas: 6516661)
+[PASS] testBench_sort5() (gas: 6516705)
 Logs:
   LibSortNet::sort5 (min: 353, max: 556, ~: 445)
   LibSort::insertionSort (min: 655, max: 1293, ~: 970)
   LibSort::sort (min: 595, max: 1928, ~: 1485)
 
-[PASS] testBench_sort6() (gas: 7650084)
+[PASS] testBench_sort6() (gas: 7650128)
 Logs:
   LibSortNet::sort6 (min: 480, max: 770, ~: 633)
   LibSort::insertionSort (min: 784, max: 1749, ~: 1257)
@@ -112,11 +120,17 @@ Logs:
   LibSort::insertionSort (min: 1028, max: 2269, ~: 1574)
   LibSort::sort (min: 1476, max: 2890, ~: 2123)
 
-[PASS] testBench_sort8() (gas: 10676072)
+[PASS] testBench_sort8() (gas: 10676116)
 Logs:
   LibSortNet::sort8 (min: 1096, max: 1685, ~: 1361)
   LibSort::insertionSort (min: 1101, max: 2736, ~: 1940)
   LibSort::sort (min: 1732, max: 3435, ~: 2495)
+
+[PASS] testBench_sort9() (gas: 12413804)
+Logs:
+  LibSortNet::sort9 (min: 1399, max: 1991, ~: 1715)
+  LibSort::insertionSort (min: 1356, max: 3192, ~: 2323)
+  LibSort::sort (min: 1963, max: 3977, ~: 2907)
 ```
 
 </details>

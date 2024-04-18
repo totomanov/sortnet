@@ -47,6 +47,18 @@ contract LibSortNetTest is Test {
         assertOrdered(a);
     }
 
+    function testSort9(FuzzableArr memory f) public pure {
+        uint256[] memory a = bound(f, 9);
+        LibSortNet.sort9(a);
+        assertOrdered(a);
+    }
+
+    function testSort10(FuzzableArr memory f) public pure {
+        uint256[] memory a = bound(f, 10);
+        LibSortNet.sort10(a);
+        assertOrdered(a);
+    }
+
     struct FuzzableArr {
         uint256 __dummy;
         uint256 e0;
@@ -57,6 +69,8 @@ contract LibSortNetTest is Test {
         uint256 e5;
         uint256 e6;
         uint256 e7;
+        uint256 e8;
+        uint256 e9;
     }
 
     function bound(FuzzableArr memory inputs, uint256 size) internal pure returns (uint256[] memory a) {

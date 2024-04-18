@@ -11,7 +11,7 @@ contract LibSortNetBenchTest is Test {
     uint256 internal constant PRNG_SEED = 2718;
     uint256 internal constant RUNS = 1000;
 
-    function printRuns(string memory s, uint256[RUNS] memory runs) internal view {
+    function printRuns(string memory s, uint256[RUNS] memory runs) internal pure {
         uint256 min = type(uint256).max;
         uint256 max = 0;
         uint256 sum = 0;
@@ -245,6 +245,70 @@ contract LibSortNetBenchTest is Test {
         }
 
         printRuns("LibSortNet::sort8 (min: %s, max: %s, ~: %s)", runs0);
+        printRuns("LibSort::insertionSort (min: %s, max: %s, ~: %s)", runs1);
+        printRuns("LibSort::sort (min: %s, max: %s, ~: %s)", runs2);
+    }
+
+    function testBench_sort9() public view {
+        LibPRNG.PRNG memory prng = LibPRNG.PRNG(PRNG_SEED);
+        uint256[RUNS] memory runs0;
+        uint256[RUNS] memory runs1;
+        uint256[RUNS] memory runs2;
+        uint256[] memory a = arrOf(9);
+
+        for (uint256 i = 0; i < RUNS; ++i) {
+            LibPRNG.shuffle(prng, a);
+            uint256 before0 = gasleft();
+            LibSortNet.sort9(a);
+            uint256 after0 = gasleft();
+            runs0[i] = before0 - after0;
+
+            LibPRNG.shuffle(prng, a);
+            uint256 before1 = gasleft();
+            LibSort.insertionSort(a);
+            uint256 after1 = gasleft();
+            runs1[i] = before1 - after1;
+
+            LibPRNG.shuffle(prng, a);
+            uint256 before2 = gasleft();
+            LibSort.sort(a);
+            uint256 after2 = gasleft();
+            runs2[i] = before2 - after2;
+        }
+
+        printRuns("LibSortNet::sort9 (min: %s, max: %s, ~: %s)", runs0);
+        printRuns("LibSort::insertionSort (min: %s, max: %s, ~: %s)", runs1);
+        printRuns("LibSort::sort (min: %s, max: %s, ~: %s)", runs2);
+    }
+
+    function testBench_sort10() public view {
+        LibPRNG.PRNG memory prng = LibPRNG.PRNG(PRNG_SEED);
+        uint256[RUNS] memory runs0;
+        uint256[RUNS] memory runs1;
+        uint256[RUNS] memory runs2;
+        uint256[] memory a = arrOf(10);
+
+        for (uint256 i = 0; i < RUNS; ++i) {
+            LibPRNG.shuffle(prng, a);
+            uint256 before0 = gasleft();
+            LibSortNet.sort10(a);
+            uint256 after0 = gasleft();
+            runs0[i] = before0 - after0;
+
+            LibPRNG.shuffle(prng, a);
+            uint256 before1 = gasleft();
+            LibSort.insertionSort(a);
+            uint256 after1 = gasleft();
+            runs1[i] = before1 - after1;
+
+            LibPRNG.shuffle(prng, a);
+            uint256 before2 = gasleft();
+            LibSort.sort(a);
+            uint256 after2 = gasleft();
+            runs2[i] = before2 - after2;
+        }
+
+        printRuns("LibSortNet::sort10 (min: %s, max: %s, ~: %s)", runs0);
         printRuns("LibSort::insertionSort (min: %s, max: %s, ~: %s)", runs1);
         printRuns("LibSort::sort (min: %s, max: %s, ~: %s)", runs2);
     }
