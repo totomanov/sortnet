@@ -25,7 +25,7 @@ A _sorting network_ is a sequence of operations that sorts an array in place. Ea
 
 `(0,2),(0,1),(1,2)` is a sorting network for an array of length 3.
 
-```toml
+```solidity
 [1 2 0] --(0,2)-> [0 2 1] --(0,1)-> [0 2 1] --(1,2)-> [0 1 2]
 [2 0 1] --(0,2)-> [1 0 2] --(0,1)-> [0 1 2] --(1,2)-> [0 1 2]
 [2 1 0] --(0,2)-> [0 1 2] --(0,1)-> [0 1 2] --(1,2)-> [0 1 2]
