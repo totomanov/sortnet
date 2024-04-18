@@ -1,8 +1,8 @@
 ## Sortnet
 
-Solidity library for sorting fixed-size arrays in an extremely gas-efficient way.
+Sort fixed-size Solidity arrays in an extremely gas-efficient way.
 
-`LibSortNet` sorts small fixed-size arrays in 30–60% less gas than [Solady](https://github.com/Vectorized/solady)'s gas-optimized `LibSort::insertionSort`.
+For arrays of size 2-10 `LibSortNet` consumes 30–60% less gas than insertion sort in [Solady](https://github.com/Vectorized/solady).
 
 ## Introduction
 
