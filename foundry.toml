@@ -4,7 +4,7 @@ out = "out"
 libs = ["lib"]
 solc = "0.8.25"
 optimizer = true
-optimizer_runs = 20_000
+optimizer_runs = 100_000
 via-ir = true
 
 [fuzz]

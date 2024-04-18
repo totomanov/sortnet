@@ -13,20 +13,14 @@ library LibSortNet {
     /// @dev Note: Array length is NOT validated.
     /// [(0,1)]
     function sort2(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            cas(f0, f1)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
         }
+        cas(f0, f1);
     }
 
     /// @notice Sorts an array with 3 elements.
@@ -35,23 +29,18 @@ library LibSortNet {
     /// [(0,1)]
     /// [(1,2)]
     function sort3(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            cas(f0, f2)
-            cas(f0, f1)
-            cas(f1, f2)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
         }
+        cas(f0, f2);
+        cas(f0, f1);
+        cas(f1, f2);
     }
 
     /// @notice Sorts an array with 4 elements.
@@ -60,26 +49,22 @@ library LibSortNet {
     /// [(0,1),(2,3)]
     /// [(1,2)]
     function sort4(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            cas(f0, f2)
-            cas(f1, f3)
-            cas(f0, f1)
-            cas(f2, f3)
-            cas(f1, f2)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
         }
+        cas(f0, f2);
+        cas(f1, f3);
+        cas(f0, f1);
+        cas(f2, f3);
+        cas(f1, f2);
     }
 
     /// @notice Sorts an array with 5 elements.
@@ -90,31 +75,28 @@ library LibSortNet {
     /// [(1,2),(3,4)]
     /// [(2,3)]
     function sort5(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            cas(f0, f3)
-            cas(f1, f4)
-            cas(f0, f2)
-            cas(f1, f3)
-            cas(f0, f1)
-            cas(f2, f4)
-            cas(f1, f2)
-            cas(f3, f4)
-            cas(f2, f3)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
         }
+        cas(f0, f3);
+        cas(f1, f4);
+        cas(f0, f2);
+        cas(f1, f3);
+        cas(f0, f1);
+        cas(f2, f4);
+        cas(f1, f2);
+        cas(f3, f4);
+        cas(f2, f3);
     }
 
     /// @notice Sorts an array with 6 elements.
@@ -125,35 +107,33 @@ library LibSortNet {
     /// [(0,1),(2,3),(4,5)]
     /// [(1,2),(3,4)]
     function sort6(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
+        uint256 f5;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            let f5 := add(a, 0xc0)
-            cas(f0, f5)
-            cas(f1, f3)
-            cas(f2, f4)
-            cas(f1, f2)
-            cas(f3, f4)
-            cas(f0, f3)
-            cas(f2, f5)
-            cas(f0, f1)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f1, f2)
-            cas(f3, f4)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
+            f5 := add(a, 0xc0)
         }
+        cas(f0, f5);
+        cas(f1, f3);
+        cas(f2, f4);
+        cas(f1, f2);
+        cas(f3, f4);
+        cas(f0, f3);
+        cas(f2, f5);
+        cas(f0, f1);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f1, f2);
+        cas(f3, f4);
     }
 
     /// @notice Sorts an array with 7 elements.
@@ -165,40 +145,39 @@ library LibSortNet {
     /// [(2,3),(4,5)]
     /// [(1,2),(3,4),(5,6)]
     function sort7(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
+        uint256 f5;
+        uint256 f6;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            let f5 := add(a, 0xc0)
-            let f6 := add(a, 0xe0)
-            cas(f0, f6)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f0, f2)
-            cas(f1, f4)
-            cas(f3, f6)
-            cas(f0, f1)
-            cas(f2, f5)
-            cas(f3, f4)
-            cas(f1, f2)
-            cas(f4, f6)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f1, f2)
-            cas(f3, f4)
-            cas(f5, f6)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
+            f5 := add(a, 0xc0)
+            f6 := add(a, 0xe0)
         }
+        cas(f0, f6);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f0, f2);
+        cas(f1, f4);
+        cas(f3, f6);
+        cas(f0, f1);
+        cas(f2, f5);
+        cas(f3, f4);
+        cas(f1, f2);
+        cas(f4, f6);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f1, f2);
+        cas(f3, f4);
+        cas(f5, f6);
     }
 
     /// @notice Sorts an array with 8 elements.
@@ -210,44 +189,44 @@ library LibSortNet {
     /// [(1,4),(3,6)]
     /// [(1,2),(3,4),(5,6)]
     function sort8(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
+        uint256 f5;
+        uint256 f6;
+        uint256 f7;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            let f5 := add(a, 0xc0)
-            let f6 := add(a, 0xe0)
-            let f7 := add(a, 0x100)
-            cas(f0, f2)
-            cas(f1, f3)
-            cas(f4, f6)
-            cas(f5, f7)
-            cas(f0, f4)
-            cas(f1, f5)
-            cas(f2, f6)
-            cas(f3, f7)
-            cas(f0, f1)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f6, f7)
-            cas(f2, f4)
-            cas(f3, f5)
-            cas(f1, f4)
-            cas(f3, f6)
-            cas(f1, f2)
-            cas(f3, f4)
-            cas(f5, f6)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
+            f5 := add(a, 0xc0)
+            f6 := add(a, 0xe0)
+            f7 := add(a, 0x100)
         }
+        cas(f0, f2);
+        cas(f1, f3);
+        cas(f4, f6);
+        cas(f5, f7);
+        cas(f0, f4);
+        cas(f1, f5);
+        cas(f2, f6);
+        cas(f3, f7);
+        cas(f0, f1);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f6, f7);
+        cas(f2, f4);
+        cas(f3, f5);
+        cas(f1, f4);
+        cas(f3, f6);
+        cas(f1, f2);
+        cas(f3, f4);
+        cas(f5, f6);
     }
 
     /// @notice Sorts an array with 9 elements.
@@ -260,51 +239,52 @@ library LibSortNet {
     /// [(2,3),(4,5),(6,7)]
     /// [(1,2),(3,4),(5,6)]
     function sort9(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
+        uint256 f5;
+        uint256 f6;
+        uint256 f7;
+        uint256 f8;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
-
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            let f5 := add(a, 0xc0)
-            let f6 := add(a, 0xe0)
-            let f7 := add(a, 0x100)
-            let f8 := add(a, 0x120)
-            cas(f0, f3)
-            cas(f1, f7)
-            cas(f2, f5)
-            cas(f4, f8)
-            cas(f0, f7)
-            cas(f2, f4)
-            cas(f3, f8)
-            cas(f5, f6)
-            cas(f0, f2)
-            cas(f1, f3)
-            cas(f4, f5)
-            cas(f7, f8)
-            cas(f1, f4)
-            cas(f3, f6)
-            cas(f5, f7)
-            cas(f0, f1)
-            cas(f2, f4)
-            cas(f3, f5)
-            cas(f6, f8)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f6, f7)
-            cas(f1, f2)
-            cas(f3, f4)
-            cas(f5, f6)
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
+            f5 := add(a, 0xc0)
+            f6 := add(a, 0xe0)
+            f7 := add(a, 0x100)
+            f8 := add(a, 0x120)
         }
+        cas(f0, f3);
+        cas(f1, f7);
+        cas(f2, f5);
+        cas(f4, f8);
+        cas(f0, f7);
+        cas(f2, f4);
+        cas(f3, f8);
+        cas(f5, f6);
+        cas(f0, f2);
+        cas(f1, f3);
+        cas(f4, f5);
+        cas(f7, f8);
+        cas(f1, f4);
+        cas(f3, f6);
+        cas(f5, f7);
+        cas(f0, f1);
+        cas(f2, f4);
+        cas(f3, f5);
+        cas(f6, f8);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f6, f7);
+        cas(f1, f2);
+        cas(f3, f4);
+        cas(f5, f6);
     }
 
     /// @notice Sorts an array with 10 elements.
@@ -318,55 +298,72 @@ library LibSortNet {
     /// [(2,3),(4,5),(6,7)]
     /// [(3,4),(5,6)]
     function sort10(uint256[] memory a) internal pure {
+        uint256 f0;
+        uint256 f1;
+        uint256 f2;
+        uint256 f3;
+        uint256 f4;
+        uint256 f5;
+        uint256 f6;
+        uint256 f7;
+        uint256 f8;
+        uint256 f9;
         /// @solidity memory-safe-assembly
         assembly {
-            function cas(fx, fy) {
-                if gt(mload(fx), mload(fy)) {
-                    let ey := mload(fy)
-                    mstore(fy, mload(fx))
-                    mstore(fx, ey)
-                }
-            }
+            f0 := add(a, 0x20)
+            f1 := add(a, 0x40)
+            f2 := add(a, 0x60)
+            f3 := add(a, 0x80)
+            f4 := add(a, 0xa0)
+            f5 := add(a, 0xc0)
+            f6 := add(a, 0xe0)
+            f7 := add(a, 0x100)
+            f8 := add(a, 0x120)
+            f9 := add(a, 0x140)
+        }
+        cas(f0, f8);
+        cas(f1, f9);
+        cas(f2, f7);
+        cas(f3, f5);
+        cas(f4, f6);
+        cas(f0, f2);
+        cas(f1, f4);
+        cas(f5, f8);
+        cas(f7, f9);
+        cas(f0, f3);
+        cas(f2, f4);
+        cas(f5, f7);
+        cas(f6, f9);
+        cas(f0, f1);
+        cas(f3, f6);
+        cas(f8, f9);
+        cas(f1, f5);
+        cas(f2, f3);
+        cas(f4, f8);
+        cas(f6, f7);
+        cas(f1, f2);
+        cas(f3, f5);
+        cas(f4, f6);
+        cas(f7, f8);
+        cas(f2, f3);
+        cas(f4, f5);
+        cas(f6, f7);
+        cas(f3, f4);
+        cas(f5, f6);
+    }
 
-            let f0 := add(a, 0x20)
-            let f1 := add(a, 0x40)
-            let f2 := add(a, 0x60)
-            let f3 := add(a, 0x80)
-            let f4 := add(a, 0xa0)
-            let f5 := add(a, 0xc0)
-            let f6 := add(a, 0xe0)
-            let f7 := add(a, 0x100)
-            let f8 := add(a, 0x120)
-            let f9 := add(a, 0x140)
-            cas(f0, f8)
-            cas(f1, f9)
-            cas(f2, f7)
-            cas(f3, f5)
-            cas(f4, f6)
-            cas(f0, f2)
-            cas(f1, f4)
-            cas(f5, f8)
-            cas(f7, f9)
-            cas(f0, f3)
-            cas(f2, f4)
-            cas(f5, f7)
-            cas(f6, f9)
-            cas(f0, f1)
-            cas(f3, f6)
-            cas(f8, f9)
-            cas(f1, f5)
-            cas(f2, f3)
-            cas(f4, f8)
-            cas(f6, f7)
-            cas(f1, f2)
-            cas(f3, f5)
-            cas(f4, f6)
-            cas(f7, f8)
-            cas(f2, f3)
-            cas(f4, f5)
-            cas(f6, f7)
-            cas(f3, f4)
-            cas(f5, f6)
+    /// @notice Compare two words and swap their contents if necessary.
+    /// @param fx The offset of the first word.
+    /// @param fy The offset of the second word.
+    /// @dev Swapped if `mload(fx) > mload(fy)`.
+    function cas(uint256 fx, uint256 fy) internal pure {
+        /// @solidity memory-safe-assembly
+        assembly {
+            if gt(mload(fx), mload(fy)) {
+                let ey := mload(fy)
+                mstore(fy, mload(fx))
+                mstore(fx, ey)
+            }
         }
     }
 }
