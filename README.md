@@ -29,7 +29,7 @@ A _sorting network_ is a sequence of operations that sorts an array in place. Ea
 To install with [**Foundry**](https://github.com/foundry-rs/foundry):
 
 ```sh
-forge install transmissions11/solmate
+forge install totomanov/sortnet
 ```
 
 ## Usage
