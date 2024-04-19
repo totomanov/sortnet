@@ -523,6 +523,7 @@ library LibSortNet {
     /// @notice Returns the median of an array with 2 elements.
     /// @param a The array to find the median.
     /// @dev Array length is NOT validated. Overflow is NOT checked.
+    /// @return m The median of the array.
     function median2(uint256[] memory a) internal pure returns (uint256 m) {
         /// @solidity memory-safe-assembly
         assembly {
@@ -539,6 +540,7 @@ library LibSortNet {
     /// [(0,1)]
     /// [(1,2)]
     /// [(0,1)]
+    /// @return m The median of the array.
     function median3(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -550,11 +552,7 @@ library LibSortNet {
         }
         cas(f0, f2);
         cas(f0, f1);
-        cas(f1, f2);
-        /// @solidity memory-safe-assembly
-        assembly {
-            m := mload(f1)
-        }
+        m = cas_ret0(f1, f2);
     }
 
     /// @notice Returns the median of an array with 4 elements.
@@ -563,6 +561,7 @@ library LibSortNet {
     /// Network: https://bertdobbelaere.github.io/median_networks.html#N4L4D2
     /// [(0,1),(2,3)]
     /// [(0,2),(1,3)]
+    /// @return m The median of the array.
     function median4(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -576,11 +575,10 @@ library LibSortNet {
         }
         cas(f0, f1);
         cas(f2, f3);
-        cas(f0, f2);
-        cas(f1, f3);
-        /// @solidity memory-safe-assembly
+        uint256 m0 = cas_ret1(f0, f2);
+        uint256 m1 = cas_ret0(f1, f3);
         assembly {
-            m := shr(1, add(mload(f1), mload(f2)))
+            m := shr(1, add(m0, m1))
         }
     }
 
@@ -593,6 +591,7 @@ library LibSortNet {
     /// [(2,4)]
     /// [(1,2)]
     /// [(2,4)]
+    /// @return m The median of the array.
     function median5(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -612,11 +611,7 @@ library LibSortNet {
         cas(f1, f3);
         cas(f2, f4);
         cas(f1, f2);
-        cas(f2, f4);
-        /// @solidity memory-safe-assembly
-        assembly {
-            m := mload(f2)
-        }
+        m = cas_ret0(f2, f4);
     }
 
     /// @notice Returns the median of an array with 6 elements.
@@ -627,6 +622,7 @@ library LibSortNet {
     /// [(0,5),(1,3),(2,4)]
     /// [(0,2),(1,4),(3,5)]
     /// [(1,2),(3,4)]
+    /// @return m The median of the array.
     function median6(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -650,11 +646,10 @@ library LibSortNet {
         cas(f0, f2);
         cas(f1, f4);
         cas(f3, f5);
-        cas(f1, f2);
-        cas(f3, f4);
-        /// @solidity memory-safe-assembly
+        uint256 m0 = cas_ret1(f1, f2);
+        uint256 m1 = cas_ret0(f3, f4);
         assembly {
-            m := shr(1, add(mload(f2), mload(f3)))
+            m := shr(1, add(m0, m1))
         }
     }
 
@@ -668,6 +663,7 @@ library LibSortNet {
     /// [(1,3),(2,4)]
     /// [(3,4)]
     /// [(2,3)]
+    /// @return m The median of the array.
     function median7(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -697,11 +693,7 @@ library LibSortNet {
         cas(f1, f3);
         cas(f2, f4);
         cas(f3, f4);
-        cas(f2, f3);
-        /// @solidity memory-safe-assembly
-        assembly {
-            m := mload(f3)
-        }
+        m = cas_ret1(f2, f3);
     }
 
     /// @notice Returns the median of an array with 8 elements.
@@ -713,6 +705,7 @@ library LibSortNet {
     /// [(0,1),(2,4),(3,5),(6,7)]
     /// [(2,3),(4,5)]
     /// [(1,4),(3,6)]
+    /// @return m The median of the array.
     function median8(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -746,11 +739,10 @@ library LibSortNet {
         cas(f6, f7);
         cas(f2, f3);
         cas(f4, f5);
-        cas(f1, f4);
-        cas(f3, f6);
-        /// @solidity memory-safe-assembly
+        uint256 m0 = cas_ret1(f1, f4);
+        uint256 m1 = cas_ret0(f3, f6);
         assembly {
-            m := shr(1, add(mload(f3), mload(f4)))
+            m := shr(1, add(m0, m1))
         }
     }
 
@@ -765,6 +757,7 @@ library LibSortNet {
     /// [(2,5),(4,6)]
     /// [(2,3),(4,5)]
     /// [(3,4)]
+    /// @return m The median of the array.
     function median9(uint256[] memory a) internal pure returns (uint256 m) {
         uint256 f0;
         uint256 f1;
@@ -804,17 +797,13 @@ library LibSortNet {
         cas(f4, f6);
         cas(f2, f3);
         cas(f4, f5);
-        cas(f3, f4);
-        /// @solidity memory-safe-assembly
-        assembly {
-            m := mload(f4)
-        }
+        m = cas_ret1(f3, f4);
     }
 
-    /// @notice Compare two words and swap their contents if necessary.
+    /// @notice Compare two words and swap if gt.
     /// @param fx The offset of the first word.
     /// @param fy The offset of the second word.
-    /// @dev Swapped if `mload(fx) > mload(fy)`.
+    /// @dev Swap if `mload(fx) > mload(fy)`.
     function cas(uint256 fx, uint256 fy) internal pure {
         /// @solidity memory-safe-assembly
         assembly {
@@ -822,6 +811,42 @@ library LibSortNet {
                 let ey := mload(fy)
                 mstore(fy, mload(fx))
                 mstore(fx, ey)
+            }
+        }
+    }
+
+    /// @notice Compare two words and swap if gt, returning the smaller word.
+    /// @param fx The offset of the first word.
+    /// @param fy The offset of the second word.
+    /// @dev Swap if `mload(fx) > mload(fy)`.
+    /// @return r The smaller word.
+    function cas_ret0(uint256 fx, uint256 fy) internal pure returns (uint256 r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r := mload(fx)
+            let y := mload(fy)
+            if gt(r, y) {
+                mstore(fy, r)
+                mstore(fx, y)
+                r := y
+            }
+        }
+    }
+
+    /// @notice Compare two words and swap if gt, returning the bigger word.
+    /// @param fx The offset of the first word.
+    /// @param fy The offset of the second word.
+    /// @dev Swap if `mload(fx) > mload(fy)`.
+    /// @return r The bigger word.
+    function cas_ret1(uint256 fx, uint256 fy) internal pure returns (uint256 r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            let x := mload(fx)
+            r := mload(fy)
+            if gt(x, r) {
+                mstore(fy, x)
+                mstore(fx, r)
+                r := x
             }
         }
     }
