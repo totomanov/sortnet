@@ -34,7 +34,13 @@ forge install totomanov/sortnet
 
 ## Usage
 
-You can use `LibSortNet` to sort a `uint256[] memory` array with a known fixed size (2-10) in place in ascending order.
+#### `function sort*(uint256[] memory a) internal pure`
+
+Sorts a `uint256[] memory` array in-place. The size must be known beforehand and must be between 3 and 32.
+
+#### `function median*(uint256[] memory a) internal pure returns (uint256 m)`
+
+Returns the median of a `uint256[] memory` array with known size. The size must be known beforehand and must be between 3 and 32.
 
 ## Benchmark
 
