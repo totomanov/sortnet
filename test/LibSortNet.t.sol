@@ -1,132 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import {console2} from "forge-std/console2.sol";
 import {Test} from "forge-std/Test.sol";
-import {LibSortNet} from "src/LibSortNet.sol";
+import {LibSortNetHarness} from "test/LibSortNetHarness.sol";
 
 contract LibSortNetTest is Test {
     uint256 internal constant MAX_VALUE = type(uint256).max / 2;
+    uint256 internal constant MAX_SIZE = 32;
 
-    function testSort2(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 2);
-        LibSortNet.sort2(a);
+    function testSort(FuzzableArr memory f, uint256 size) public pure {
+        size = bound(size, 2, MAX_SIZE);
+        uint256[] memory a = bound(f, size);
+
+        LibSortNetHarness.sortN(size, a);
         assertSorted(a);
     }
 
-    function testSort3(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 3);
-        LibSortNet.sort3(a);
-        assertSorted(a);
-    }
+    function testMedian(FuzzableArr memory f, uint256 size) public pure {
+        size = bound(size, 3, MAX_SIZE);
+        uint256[] memory a = bound(f, size);
 
-    function testSort4(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 4);
-        LibSortNet.sort4(a);
-        assertSorted(a);
-    }
+        uint256 median = LibSortNetHarness.medianN(size, a);
+        uint256 mid = size / 2;
+        uint256 expected = size % 2 == 1 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
 
-    function testSort5(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 5);
-        LibSortNet.sort5(a);
-        assertSorted(a);
-    }
-
-    function testSort6(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 6);
-        LibSortNet.sort6(a);
-        assertSorted(a);
-    }
-
-    function testSort7(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 7);
-        LibSortNet.sort7(a);
-        assertSorted(a);
-    }
-
-    function testSort8(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 8);
-        LibSortNet.sort8(a);
-        assertSorted(a);
-    }
-
-    function testSort9(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 9);
-        LibSortNet.sort9(a);
-        assertSorted(a);
-    }
-
-    function testSort10(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 10);
-        LibSortNet.sort10(a);
-        assertSorted(a);
-    }
-
-    function testSort11(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 11);
-        LibSortNet.sort11(a);
-        assertSorted(a);
-    }
-
-    function testSort12(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 12);
-        LibSortNet.sort12(a);
-        assertSorted(a);
-    }
-
-    function testMedian2(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 2);
-        uint256 median = LibSortNet.median2(a);
-        assertEq(median, (a[0] + a[1]) / 2);
-    }
-
-    function testMedian3(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 3);
-        uint256 median = LibSortNet.median3(a);
-        LibSortNet.sort3(a);
-        assertEq(median, a[1]);
-    }
-
-    function testMedian4(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 4);
-        uint256 median = LibSortNet.median4(a);
-        LibSortNet.sort4(a);
-        assertEq(median, (a[1] + a[2]) / 2);
-    }
-
-    function testMedian5(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 5);
-        uint256 median = LibSortNet.median5(a);
-        LibSortNet.sort5(a);
-        assertEq(median, a[2]);
-    }
-
-    function testMedian6(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 6);
-        uint256 median = LibSortNet.median6(a);
-        LibSortNet.sort6(a);
-        assertEq(median, (a[2] + a[3]) / 2);
-    }
-
-    function testMedian7(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 7);
-        uint256 median = LibSortNet.median7(a);
-        LibSortNet.sort7(a);
-        assertEq(median, a[3]);
-    }
-
-    function testMedian8(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 8);
-        uint256 median = LibSortNet.median8(a);
-        LibSortNet.sort8(a);
-        assertEq(median, (a[3] + a[4]) / 2);
-    }
-
-    function testMedian9(FuzzableArr memory f) public pure {
-        uint256[] memory a = bound(f, 9);
-        uint256 median = LibSortNet.median9(a);
-        LibSortNet.sort9(a);
-        assertEq(median, a[4]);
+        assertEq(median, expected);
     }
 
     struct FuzzableArr {
@@ -143,6 +41,26 @@ contract LibSortNetTest is Test {
         uint256 e9;
         uint256 e10;
         uint256 e11;
+        uint256 e12;
+        uint256 e13;
+        uint256 e14;
+        uint256 e15;
+        uint256 e16;
+        uint256 e17;
+        uint256 e18;
+        uint256 e19;
+        uint256 e20;
+        uint256 e21;
+        uint256 e22;
+        uint256 e23;
+        uint256 e24;
+        uint256 e25;
+        uint256 e26;
+        uint256 e27;
+        uint256 e28;
+        uint256 e29;
+        uint256 e30;
+        uint256 e31;
     }
 
     function bound(FuzzableArr memory inputs, uint256 size) internal pure returns (uint256[] memory a) {
@@ -158,6 +76,27 @@ contract LibSortNetTest is Test {
         inputs.e9 = bound(inputs.e9, 0, MAX_VALUE);
         inputs.e10 = bound(inputs.e10, 0, MAX_VALUE);
         inputs.e11 = bound(inputs.e11, 0, MAX_VALUE);
+        inputs.e12 = bound(inputs.e12, 0, MAX_VALUE);
+        inputs.e13 = bound(inputs.e13, 0, MAX_VALUE);
+        inputs.e14 = bound(inputs.e14, 0, MAX_VALUE);
+        inputs.e15 = bound(inputs.e15, 0, MAX_VALUE);
+        inputs.e16 = bound(inputs.e16, 0, MAX_VALUE);
+        inputs.e17 = bound(inputs.e17, 0, MAX_VALUE);
+        inputs.e18 = bound(inputs.e18, 0, MAX_VALUE);
+        inputs.e19 = bound(inputs.e19, 0, MAX_VALUE);
+        inputs.e20 = bound(inputs.e20, 0, MAX_VALUE);
+        inputs.e21 = bound(inputs.e21, 0, MAX_VALUE);
+        inputs.e22 = bound(inputs.e22, 0, MAX_VALUE);
+        inputs.e23 = bound(inputs.e23, 0, MAX_VALUE);
+        inputs.e24 = bound(inputs.e24, 0, MAX_VALUE);
+        inputs.e25 = bound(inputs.e25, 0, MAX_VALUE);
+        inputs.e26 = bound(inputs.e26, 0, MAX_VALUE);
+        inputs.e27 = bound(inputs.e27, 0, MAX_VALUE);
+        inputs.e28 = bound(inputs.e28, 0, MAX_VALUE);
+        inputs.e29 = bound(inputs.e29, 0, MAX_VALUE);
+        inputs.e30 = bound(inputs.e30, 0, MAX_VALUE);
+        inputs.e31 = bound(inputs.e31, 0, MAX_VALUE);
+
         assembly {
             mstore(inputs, size)
             a := inputs

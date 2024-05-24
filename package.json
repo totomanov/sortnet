@@ -1,0 +1,15 @@
+{
+  "name": "sortnet",
+  "version": "1.0.0",
+  "description": "Sort fixed-size Solidity arrays in an extremely gas-efficient way.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "generate": "node script/generate.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
